@@ -1,5 +1,6 @@
 body,
 html {
+  height: 100%;
   margin: 0;
   padding: 0;
   text-align: center;
@@ -7,12 +8,12 @@ html {
 }
 
 .container-main {
+  height: 100%;
   display: grid;
   grid-template-columns: 1fr 5fr;
-  grid-template-rows: 1fr 5fr 1fr;
+  grid-template-rows: 1fr 5fr 0.5fr;
 }
 .header {
-  height: 100px;
   grid-column: 1 / 3;
   border-bottom: solid;
   font-size: 40px;
@@ -27,4 +28,12 @@ html {
 .footer {
   grid-column: 1/3;
   border-top: solid;
+}
+
+.sideNav:hover {
+  background-color: aquamarine;
+}
+.sideNav:active {
+  background-color: darkslategrey;
+  color: white;
 }
