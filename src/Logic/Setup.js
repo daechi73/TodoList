@@ -114,13 +114,16 @@ const closeTaskBtnHandler = () => {
   });
 };
 
+//inside InformationBox
 const addTaskBtnHandler = () => {
   const addTaskBtn = document.querySelector(".addTaskBtn");
   const taskBox = document.querySelector(".taskBox");
   addTaskBtn.addEventListener("click", () => {
     taskBox.classList.remove("hidden");
+    taskBoxAddBtnHandler();
   });
 };
+//inside TaskBox itself
 const taskBoxAddBtnHandler = () => {
   const tbAddBtn = document.querySelector(".taskAddBtn");
   const taskTitleInput = document.querySelector(".taskTitleInput");
@@ -128,9 +131,12 @@ const taskBoxAddBtnHandler = () => {
   const infoProjectName = document.querySelector(".projectName");
   tbAddBtn.addEventListener("click", () => {
     const task = new Task(taskTitleInput.value, taskPriorityInput.value);
-    Project.getProjects().forEach((p) => {
-      if (p.getName() === infoProjectName) {
+    Projects.getProjects().forEach((p) => {
+      if (p.getName() === infoProjectName.textContent) {
         p.addTask(task);
+        p.getTasks().forEach((t) => {
+          console.log(t);
+        });
       }
     });
   });
@@ -162,5 +168,4 @@ export {
   closeTaskBtnHandler,
   projectSubmitBtnHandler,
   addTaskBtnHandler,
-  taskBoxAddBtnHandler,
 };
