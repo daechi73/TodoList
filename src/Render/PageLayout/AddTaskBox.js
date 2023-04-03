@@ -4,7 +4,9 @@ const addTaskBox = () => {
   const tbTitle = document.createElement("div");
   const tbForm = document.createElement("div");
   const tbCloseBtn = document.createElement("button");
+  const tbErrorMsg = document.createElement("div");
 
+  tbErrorMsg.classList.add("tbErrorMsg");
   taskBox.classList.add("taskBox");
   tbHeader.classList.add("tbHeader");
   tbCloseBtn.classList.add("tbCloseBtn");
@@ -42,6 +44,7 @@ const addTaskBox = () => {
   tbHeader.appendChild(tbCloseBtn);
 
   taskBox.appendChild(tbHeader);
+  taskBox.appendChild(tbErrorMsg);
   taskBox.appendChild(tbForm);
   document.querySelector(".container-main").appendChild(taskBox);
 };
