@@ -109,12 +109,14 @@ const closeProjectBtnHandler = () => {
     closeProject();
   });
 };
-
+const closeTaskBox = () => {
+  const taskBox = document.querySelector(".taskBox");
+  document.querySelector(".taskBox").remove();
+};
 const closeTaskBtnHandler = () => {
   const closeTaskBtn = document.querySelector(".tbCloseBtn");
   closeTaskBtn.addEventListener("click", () => {
-    const taskBox = document.querySelector(".taskBox");
-    document.querySelector(".taskBox").remove();
+    closeTaskBox();
   });
 };
 
@@ -129,7 +131,7 @@ const addTaskBtnHandler = () => {
   });
 };
 //inside TaskBox itself
-const taskBoxAddBtnHandler = (projectName) => {
+const taskBoxAddBtnHandler = () => {
   const tbAddBtn = document.querySelector(".taskAddBtn");
   const taskTitleInput = document.querySelector(".taskTitleInput");
   const taskPriorityInput = document.querySelector("#taskPriorityInput");
@@ -140,6 +142,8 @@ const taskBoxAddBtnHandler = (projectName) => {
       if (p.getName() === infoProjectName.textContent) {
         p.addTask(task);
         addContentsToInfoBox(infoProjectName.textContent);
+        addTaskBtnHandler();
+        closeTaskBox();
       }
     });
   });
