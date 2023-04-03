@@ -135,7 +135,6 @@ const closeTaskBtnHandler = () => {
 //inside InformationBox
 const addTaskBtnHandler = () => {
   const addTaskBtn = document.querySelector(".addTaskBtn");
-  const taskBox = document.querySelector(".taskBox");
   addTaskBtn.addEventListener("click", () => {
     addTaskBox();
     taskBoxAddBtnHandler();
@@ -148,17 +147,24 @@ const taskBoxAddBtnHandler = () => {
   const taskTitleInput = document.querySelector(".taskTitleInput");
   const taskPriorityInput = document.querySelector("#taskPriorityInput");
   const infoProjectName = document.querySelector(".projectName");
+  const tbErrorMsg = document.querySelector(".tbErrorMsg");
   const tbAddBtnEventListener = tbAddBtn.addEventListener("click", () => {
-    const task = new Task(taskTitleInput.value, taskPriorityInput.value);
-    Projects.getProjects().forEach((p) => {
-      if (p.getName() === infoProjectName.textContent) {
-        p.addTask(task);
-        addContentsToInfoBox(infoProjectName.textContent);
-        addTaskBtnHandler();
-        closeTaskBox();
-      }
-    });
+    if (taskTitleInput.value === "" || taskTitleInput.value == null)
+      tbErrorMsg.textContent = "Please Enter a Task Name";
+    else {
+      const task = new Task(taskTitleInput.value, taskPriorityInput.value);
+      Projects.getProjects().forEach((p) => {
+        if (p.getName() === infoProjectName.textContent) {
+          p.addTask(task);
+          addContentsToInfoBox(infoProjectName.textContent);
+          addTaskBtnHandler();
+          closeTaskBox();
+        }
+        console.log();
+      });
+    }
   });
+
   tbAddBtnEventListener;
 };
 
