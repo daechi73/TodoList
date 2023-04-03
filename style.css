@@ -173,6 +173,11 @@ input {
   border-radius: 40px;
 }
 
+.tbErrorMsg {
+  color: red;
+  height: 10px;
+}
+
 .hidden {
   display: none;
 }
