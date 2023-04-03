@@ -3,6 +3,7 @@ import Projects from "../../Logic/Projects";
 const informationBox = () => {
   const informationBox = document.createElement("div");
   informationBox.classList.add("informationBox");
+  informationBox.classList.add("hidden");
   informationBox.textContent = "informationBox";
   document.querySelector(".mainSection").appendChild(informationBox);
 };
@@ -59,6 +60,7 @@ const addContentsToInfoBox = (projectName) => {
       }
     }
   });
+
   informationBox.appendChild(addTaskBtnDiv);
 };
 

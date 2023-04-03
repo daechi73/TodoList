@@ -15,7 +15,4 @@ startUpProjects();
 sidebarEventHandlers();
 addBtnEventHandler();
 closeProjectBtnHandler();
-closeTaskBtnHandler();
 projectSubmitBtnHandler();
-addTaskBtnHandler();
-taskBoxAddBtnHandler();

@@ -8,7 +8,7 @@ const projectsRender = () => {
   Projects.getProjects().forEach((p) => {
     const projectDiv = document.createElement("div");
     projectDiv.classList.add("project");
-    projectDiv.textContent = p.name;
+    projectDiv.textContent = p.getName();
     projectContainer.appendChild(projectDiv);
   });
 

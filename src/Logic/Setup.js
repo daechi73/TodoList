@@ -7,6 +7,7 @@ import {
   informationBox,
   addContentsToInfoBox,
 } from "../Render/PageLayout/Information";
+import { addTaskBox } from "../Render/PageLayout/AddTaskBox";
 
 const startUpProjects = () => {
   const project = new Project("Odin Project");
@@ -28,10 +29,13 @@ const mainSectionEventHandlers = () => {
     p.addEventListener("click", () => {
       if (p.classList.contains("selected")) {
         p.classList.remove("selected");
+        const informationBoxDiv = document.querySelector(".informationBox");
+        informationBoxDiv.classList.remove("hidden");
+        addContentsToInfoBox("");
       } else {
         p.classList.add("selected");
         const informationBoxDiv = document.querySelector(".informationBox");
-        //informationBoxDiv.classList.remove("hidden");
+        informationBoxDiv.classList.remove("hidden");
         addContentsToInfoBox(p.textContent);
         addTaskBtnHandler();
       }
@@ -110,7 +114,7 @@ const closeTaskBtnHandler = () => {
   const closeTaskBtn = document.querySelector(".tbCloseBtn");
   closeTaskBtn.addEventListener("click", () => {
     const taskBox = document.querySelector(".taskBox");
-    taskBox.classList.add("hidden");
+    document.querySelector(".taskBox").remove();
   });
 };
 
@@ -119,27 +123,27 @@ const addTaskBtnHandler = () => {
   const addTaskBtn = document.querySelector(".addTaskBtn");
   const taskBox = document.querySelector(".taskBox");
   addTaskBtn.addEventListener("click", () => {
-    taskBox.classList.remove("hidden");
+    addTaskBox();
     taskBoxAddBtnHandler();
+    closeTaskBtnHandler();
   });
 };
 //inside TaskBox itself
-const taskBoxAddBtnHandler = () => {
+const taskBoxAddBtnHandler = (projectName) => {
   const tbAddBtn = document.querySelector(".taskAddBtn");
   const taskTitleInput = document.querySelector(".taskTitleInput");
   const taskPriorityInput = document.querySelector("#taskPriorityInput");
   const infoProjectName = document.querySelector(".projectName");
-  tbAddBtn.addEventListener("click", () => {
+  const tbAddBtnEventListener = tbAddBtn.addEventListener("click", () => {
     const task = new Task(taskTitleInput.value, taskPriorityInput.value);
     Projects.getProjects().forEach((p) => {
       if (p.getName() === infoProjectName.textContent) {
         p.addTask(task);
-        p.getTasks().forEach((t) => {
-          console.log(t);
-        });
+        addContentsToInfoBox(infoProjectName.textContent);
       }
     });
   });
+  tbAddBtnEventListener;
 };
 
 const projectSubmitBtnHandler = () => {
@@ -165,7 +169,7 @@ export {
   sidebarEventHandlers,
   addBtnEventHandler,
   closeProjectBtnHandler,
-  closeTaskBtnHandler,
   projectSubmitBtnHandler,
   addTaskBtnHandler,
+  taskBoxAddBtnHandler,
 };

@@ -11,8 +11,6 @@ const addTaskBox = () => {
   tbTitle.classList.add("tbTitle");
   tbForm.classList.add("tbForm");
 
-  taskBox.classList.add("hidden");
-
   tbTitle.textContent = "Add Tasks";
   tbCloseBtn.textContent = "X";
 
