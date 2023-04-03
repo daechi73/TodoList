@@ -1,17 +1,14 @@
 import initialRender from "./Render/initialRender";
 import {
-  startUpProjects,
+  startUp,
   sidebarEventHandlers,
   addBtnEventHandler,
   closeProjectBtnHandler,
-  closeTaskBtnHandler,
   projectSubmitBtnHandler,
-  addTaskBtnHandler,
-  taskBoxAddBtnHandler,
 } from "./Logic/Setup";
 
 initialRender();
-startUpProjects();
+startUp();
 sidebarEventHandlers();
 addBtnEventHandler();
 closeProjectBtnHandler();

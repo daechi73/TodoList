@@ -9,7 +9,7 @@ import {
 } from "../Render/PageLayout/Information";
 import { addTaskBox } from "../Render/PageLayout/AddTaskBox";
 
-const startUpProjects = () => {
+const startUp = () => {
   const project = new Project("Odin Project");
   project.addTask(new Task("TodoList", "urgent", false));
   project.addTask(new Task("RestaurantSite", "Urgent", false));
@@ -165,7 +165,7 @@ const projectSubmitBtnHandler = () => {
   });
 };
 export {
-  startUpProjects,
+  startUp,
   sidebarEventHandlers,
   addBtnEventHandler,
   closeProjectBtnHandler,
