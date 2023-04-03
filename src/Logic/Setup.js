@@ -20,6 +20,11 @@ const startUp = () => {
   Projects.addProjects(project2);
   const project3 = new Project("BEcome a Millionaire");
   Projects.addProjects(project3);
+
+  sidebarEventHandlers();
+  addBtnEventHandler();
+  closeProjectBoxBtnHandler();
+  projectSubmitBtnHandler();
 };
 
 const mainSectionEventHandlers = () => {
@@ -33,6 +38,7 @@ const mainSectionEventHandlers = () => {
         informationBoxDiv.classList.remove("hidden");
         addContentsToInfoBox("");
       } else {
+        deHighLight("project");
         p.classList.add("selected");
         const informationBoxDiv = document.querySelector(".informationBox");
         informationBoxDiv.classList.remove("hidden");
@@ -48,6 +54,12 @@ const deHighlightNavbar = () => {
     s.classList.remove("selected");
   });
 };
+const deHighLight = (className) => {
+  const divList = document.querySelectorAll(`.${className}`);
+  divList.forEach((d) => {
+    d.classList.remove("selected");
+  });
+};
 const sidebarEventHandlers = () => {
   const today = document.querySelector(".today");
   const week = document.querySelector(".week");
@@ -58,28 +70,28 @@ const sidebarEventHandlers = () => {
 
   today.addEventListener("click", () => {
     todayRender();
-    deHighlightNavbar();
+    deHighLight("sideNav");
     today.classList.add("selected");
   });
   week.addEventListener("click", () => {
     mainSection.textContent = "week";
-    deHighlightNavbar();
+    deHighLight("sideNav");
     week.classList.add("selected");
   });
   projects.addEventListener("click", () => {
     projectsRender();
     mainSectionEventHandlers();
-    deHighlightNavbar();
+    deHighLight("sideNav");
     projects.classList.add("selected");
   });
   pastProject.addEventListener("click", () => {
     mainSection.textContent = "pastProject";
-    deHighlightNavbar();
+    deHighLight("sideNav");
     pastProject.classList.add("selected");
   });
   notes.addEventListener("click", () => {
     mainSection.textContent = "notes";
-    deHighlightNavbar();
+    deHighLight("sideNav");
     notes.classList.add("selected");
   });
 };
@@ -95,7 +107,7 @@ const addBtnEventHandler = () => {
   });
 };
 
-const closeProject = () => {
+const closeProjectBox = () => {
   const addProjectBox = document.querySelector(".addProjectBox");
   const pErrorMsg = document.querySelector(".pErrorMsg");
   const inputPName = document.querySelector(".inputPName");
@@ -103,10 +115,10 @@ const closeProject = () => {
   pErrorMsg.textContent = "";
   addProjectBox.classList.add("hidden");
 };
-const closeProjectBtnHandler = () => {
+const closeProjectBoxBtnHandler = () => {
   const closeProjectBtn = document.querySelector(".closeProjectBtn");
   closeProjectBtn.addEventListener("click", () => {
-    closeProject();
+    closeProjectBox();
   });
 };
 const closeTaskBox = () => {
@@ -162,18 +174,10 @@ const projectSubmitBtnHandler = () => {
       Projects.addProjects(project);
       projectsRender();
       mainSectionEventHandlers();
-      closeProject();
+      closeProjectBox();
       deHighlightNavbar();
       document.querySelector(".projects").classList.add("selected");
     }
   });
 };
-export {
-  startUp,
-  sidebarEventHandlers,
-  addBtnEventHandler,
-  closeProjectBtnHandler,
-  projectSubmitBtnHandler,
-  addTaskBtnHandler,
-  taskBoxAddBtnHandler,
-};
+export { startUp };
