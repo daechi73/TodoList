@@ -24,7 +24,7 @@ const addContentsToInfoBox = (projectName) => {
       const pName = document.createElement("div");
       const tasksDiv = document.createElement("div");
       tasksDiv.classList.add("tasksDiv");
-      pName.classList.add("projectName");
+      pName.classList.add("projectNameInfo");
       pName.textContent = `${p.getName()}`;
       informationBox.appendChild(pName);
       const tasks = p.getTasks();

@@ -1,12 +1,19 @@
-import Task from "./Task";
+import { format } from "date-fns";
 
 export default class Project {
-  constructor(name) {
+  constructor(name, dueDate) {
     this.name = name;
+    this.dueDate = new Date(dueDate);
     this.tasks = [];
   }
+
   getName() {
     return this.name;
+  }
+  getDueDate() {
+    return `
+    ${this.dueDate.getMonth()}-${this.dueDate.getDay()}-${this.dueDate.getFullYear()}
+    `;
   }
   getTasks() {
     return this.tasks;

@@ -77,6 +77,13 @@ html {
   text-align: start;
   padding: 20px;
 }
+.project {
+  display: flex;
+  gap: 20px;
+}
+.pDueDateDiv {
+  color: red;
+}
 .informationBox {
   display: flex;
   flex-direction: column;

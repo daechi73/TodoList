@@ -7,8 +7,18 @@ const projectsRender = () => {
   mainSection.textContent = "";
   Projects.getProjects().forEach((p) => {
     const projectDiv = document.createElement("div");
+    const pNameDiv = document.createElement("div");
+    const pDueDateDiv = document.createElement("div");
+
     projectDiv.classList.add("project");
-    projectDiv.textContent = p.getName();
+    pNameDiv.classList.add("projectName");
+    pNameDiv.textContent = p.getName();
+
+    pDueDateDiv.classList.add("pDueDateDiv");
+    pDueDateDiv.textContent = `Due Date: ${p.getDueDate()}`;
+
+    projectDiv.appendChild(pNameDiv);
+    projectDiv.appendChild(pDueDateDiv);
     projectContainer.appendChild(projectDiv);
   });
 

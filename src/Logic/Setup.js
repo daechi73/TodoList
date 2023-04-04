@@ -10,15 +10,15 @@ import {
 import { addTaskBox } from "../Render/PageLayout/AddTaskBox";
 
 const startUp = () => {
-  const project = new Project("Odin Project");
+  const project = new Project("Odin Project", "2023-04-03");
   project.addTask(new Task("TodoList", "urgent", false));
   project.addTask(new Task("RestaurantSite", "Urgent", false));
   Projects.addProjects(project);
-  const project2 = new Project("Car Fix");
+  const project2 = new Project("Car Fix", "2023-04-03");
   project2.addTask(new Task("Blinker Fluid", "urgent", false));
   project2.addTask(new Task("front Axle tighten", "Urgent", false));
   Projects.addProjects(project2);
-  const project3 = new Project("BEcome a Millionaire");
+  const project3 = new Project("BEcome a Millionaire", "2025-01-01");
   Projects.addProjects(project3);
 
   sidebarEventHandlers();
@@ -31,7 +31,7 @@ const mainSectionEventHandlers = () => {
   const projects = document.querySelectorAll(".project");
   informationBox();
   projects.forEach((p) => {
-    p.addEventListener("click", () => {
+    p.addEventListener("click", (e) => {
       if (p.classList.contains("selected")) {
         p.classList.remove("selected");
         const informationBoxDiv = document.querySelector(".informationBox");
@@ -42,7 +42,7 @@ const mainSectionEventHandlers = () => {
         p.classList.add("selected");
         const informationBoxDiv = document.querySelector(".informationBox");
         informationBoxDiv.classList.remove("hidden");
-        addContentsToInfoBox(p.textContent);
+        addContentsToInfoBox(p.firstChild.textContent);
         addTaskBtnHandler();
       }
     });
@@ -160,7 +160,6 @@ const taskBoxAddBtnHandler = () => {
           addTaskBtnHandler();
           closeTaskBox();
         }
-        console.log();
       });
     }
   });
@@ -173,10 +172,11 @@ const projectSubmitBtnHandler = () => {
   const errorMsg = document.querySelector(".pErrorMsg");
   psbtn.addEventListener("click", () => {
     const inputPName = document.querySelector(".inputPName");
+    const inputDate = document.querySelector(".inputDate");
     if (inputPName.value === "" || inputPName.value == null) {
       errorMsg.textContent = "Please Enter a project name";
     } else {
-      const project = new Project(inputPName.value);
+      const project = new Project(inputPName.value, inputDate.value);
       Projects.addProjects(project);
       projectsRender();
       mainSectionEventHandlers();
@@ -184,6 +184,7 @@ const projectSubmitBtnHandler = () => {
       deHighlightNavbar();
       document.querySelector(".projects").classList.add("selected");
     }
+    console.log(Projects.getProjects());
   });
 };
 export { startUp };

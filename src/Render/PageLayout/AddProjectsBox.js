@@ -12,12 +12,13 @@ const addProjectBox = () => {
   addProjectBox.classList.add("addProjectBox");
   addProjectBox.classList.add("hidden");
   addProjectForm.classList.add("addProjectForm");
+
   addProjectForm.innerHTML = `
   <div class="apbNameDiv formDiv"><label for="inputPName">Project Name: </label></div>
   <div class="inputNameDiv formDiv"><input id="inputPName" class="inputPName" type="text"></input></div>
   <div class="apbDateDiv"><label for="inputDate">Due Date: </label></div>
-  <div class="inputDateDiv"><input type="date" id="inputDate"
-      name="due-Date" ></input></div>
+  <div class="inputDateDiv"><input type="date" id="inputDate" class="inputDate"
+      name="due-Date" value="2023-04-03"></input></div>
   <div class="apbBtnDiv formDiv"><button class="projectSubmitBtn" type="button">+</button></div>
   `;
   title.textContent = "Add a project";
