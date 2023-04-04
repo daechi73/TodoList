@@ -9,12 +9,23 @@ import {
 } from "../Render/PageLayout/Information";
 import { addTaskBox } from "../Render/PageLayout/AddTaskBox";
 
+const CurrentPage = (() => {
+  let pageCurrent = "";
+
+  const getPageCurrent = () => {
+    return pageCurrent;
+  };
+  const setPageCurrent = (pc) => {
+    pageCurrent = pc;
+  };
+  return { getPageCurrent, setPageCurrent };
+})();
 const startUp = () => {
-  const project = new Project("Odin Project", "2023-04-03");
+  const project = new Project("Odin Project", "2023-04-04");
   project.addTask(new Task("TodoList", "urgent", false));
   project.addTask(new Task("RestaurantSite", "Urgent", false));
   Projects.addProjects(project);
-  const project2 = new Project("Car Fix", "2023-04-03");
+  const project2 = new Project("Car Fix", "2023-04-04");
   project2.addTask(new Task("Blinker Fluid", "urgent", false));
   project2.addTask(new Task("front Axle tighten", "Urgent", false));
   Projects.addProjects(project2);
@@ -44,6 +55,7 @@ const mainSectionEventHandlers = () => {
         informationBoxDiv.classList.remove("hidden");
         addContentsToInfoBox(p.firstChild.textContent);
         addTaskBtnHandler();
+        pDelBtnHandler();
       }
     });
   });
@@ -60,6 +72,42 @@ const deHighLight = (className) => {
     d.classList.remove("selected");
   });
 };
+
+const todayCombo = () => {
+  const today = document.querySelector(".today");
+  todayRender();
+  mainSectionEventHandlers();
+  deHighLight("sideNav");
+  today.classList.add("selected");
+  CurrentPage.setPageCurrent("today");
+};
+
+const weekCombo = () => {
+  const week = document.querySelector(".week");
+  const mainSection = document.querySelector(".mainSection");
+  mainSection.textContent = "week";
+  deHighLight("sideNav");
+  week.classList.add("selected");
+  CurrentPage.setPageCurrent("week");
+};
+const pastProjectCombo = () => {
+  const mainSection = document.querySelector(".mainSection");
+  const pastProject = document.querySelector(".pastProject");
+  mainSection.textContent = "pastProject";
+  deHighLight("sideNav");
+  pastProject.classList.add("selected");
+  CurrentPage.setPageCurrent("pastProject");
+};
+
+const projectsCombo = () => {
+  const projects = document.querySelector(".projects");
+  projectsRender();
+  mainSectionEventHandlers();
+  deHighLight("sideNav");
+  projects.classList.add("selected");
+  CurrentPage.setPageCurrent("projects");
+};
+
 const sidebarEventHandlers = () => {
   const today = document.querySelector(".today");
   const week = document.querySelector(".week");
@@ -69,31 +117,22 @@ const sidebarEventHandlers = () => {
   const mainSection = document.querySelector(".mainSection");
 
   today.addEventListener("click", () => {
-    todayRender();
-    mainSectionEventHandlers();
-    deHighLight("sideNav");
-    today.classList.add("selected");
+    todayCombo();
   });
   week.addEventListener("click", () => {
-    mainSection.textContent = "week";
-    deHighLight("sideNav");
-    week.classList.add("selected");
+    weekCombo();
   });
   projects.addEventListener("click", () => {
-    projectsRender();
-    mainSectionEventHandlers();
-    deHighLight("sideNav");
-    projects.classList.add("selected");
+    projectsCombo();
   });
   pastProject.addEventListener("click", () => {
-    mainSection.textContent = "pastProject";
-    deHighLight("sideNav");
-    pastProject.classList.add("selected");
+    pastProjectCombo();
   });
   notes.addEventListener("click", () => {
     mainSection.textContent = "notes";
     deHighLight("sideNav");
     notes.classList.add("selected");
+    CurrentPage.setPageCurrent("notes");
   });
 };
 const addBtnEventHandler = () => {
@@ -188,4 +227,21 @@ const projectSubmitBtnHandler = () => {
     console.log(Projects.getProjects());
   });
 };
+
+const pDelBtnHandler = () => {
+  const pDelBtn = document.querySelector(".pDelBtn");
+  const pNameInfo = document.querySelector(".projectNameInfo");
+
+  pDelBtn.addEventListener("click", () => {
+    Projects.deleteProject(pNameInfo.textContent);
+    console.log("deleted");
+    if (CurrentPage.getPageCurrent() === "projects") {
+      projectsCombo();
+    }
+    if (CurrentPage.getPageCurrent() === "today") {
+      todayCombo();
+    }
+  });
+};
+
 export { startUp };

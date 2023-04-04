@@ -19,4 +19,11 @@ export default class Projects {
   static addPastProject(pastProject) {
     this.pastProjects.push(pastProject);
   }
+  static deleteProject(projectName) {
+    for (const p in this.projects) {
+      if (this.projects[p].getName() === projectName) {
+        this.projects.splice(p, 1);
+      }
+    }
+  }
 }

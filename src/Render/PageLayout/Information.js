@@ -12,6 +12,10 @@ const addContentsToInfoBox = (projectName) => {
   const informationBox = document.querySelector(".informationBox");
   const addTaskBtnDiv = document.createElement("div");
   const addTaskBtn = document.createElement("button");
+  const delBtn = document.createElement("button");
+
+  delBtn.classList.add("pDelBtn");
+  delBtn.textContent = "D";
   addTaskBtnDiv.classList.add("addTaskBtnDiv");
   addTaskBtn.classList.add("addTaskBtn");
   addTaskBtn.textContent = "+";
@@ -27,6 +31,7 @@ const addContentsToInfoBox = (projectName) => {
       pName.classList.add("projectNameInfo");
       pName.textContent = `${p.getName()}`;
       informationBox.appendChild(pName);
+      informationBox.appendChild(delBtn);
       const tasks = p.getTasks();
       if (tasks.length === 0) {
         const taskContainer = document.createElement("div");
