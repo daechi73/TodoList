@@ -147,7 +147,7 @@ const taskBoxAddBtnHandler = () => {
   const tbAddBtn = document.querySelector(".taskAddBtn");
   const taskTitleInput = document.querySelector(".taskTitleInput");
   const taskPriorityInput = document.querySelector("#taskPriorityInput");
-  const infoProjectName = document.querySelector(".projectName");
+  const infoProjectName = document.querySelector(".projectNameInfo");
   const tbErrorMsg = document.querySelector(".tbErrorMsg");
   const tbAddBtnEventListener = tbAddBtn.addEventListener("click", () => {
     if (taskTitleInput.value === "" || taskTitleInput.value == null)
