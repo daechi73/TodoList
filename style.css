@@ -167,6 +167,20 @@ input {
   border-radius: 7px;
 }
 
+.editProjectBox {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  border: solid;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: #353a3b;
+  color: #e9e1da;
+  border-radius: 40px;
+}
 .taskBox {
   position: absolute;
   top: 20%;
