@@ -5,4 +5,4 @@ const mainSection = () => {
   document.querySelector(".container-main").appendChild(mainSection);
 };
 
-export default mainSection;
+export { mainSection };

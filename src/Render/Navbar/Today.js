@@ -28,8 +28,6 @@ const todayRender = () => {
       projectDiv.appendChild(pNameDiv);
       projectDiv.appendChild(pDueDateDiv);
       projectContainer.appendChild(projectDiv);
-    } else {
-      console.log(p.getDueDate());
     }
   });
 

@@ -70,6 +70,7 @@ const sidebarEventHandlers = () => {
 
   today.addEventListener("click", () => {
     todayRender();
+    mainSectionEventHandlers();
     deHighLight("sideNav");
     today.classList.add("selected");
   });
