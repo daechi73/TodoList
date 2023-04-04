@@ -11,11 +11,9 @@ export default class Project {
     return this.name;
   }
   getDueDate() {
-    return `
-    ${
+    return `${
       this.dueDate.getUTCMonth() + 1
-    }-${this.dueDate.getUTCDate()}-${this.dueDate.getFullYear()}
-    `;
+    }-${this.dueDate.getUTCDate()}-${this.dueDate.getFullYear()}`;
   }
   getTasks() {
     return this.tasks;
