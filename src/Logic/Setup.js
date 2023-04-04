@@ -186,7 +186,7 @@ const addTaskBtnHandler = () => {
     }
   });
 };
-//inside TaskBox itself
+//inside TaskBox
 const taskBoxAddBtnHandler = () => {
   const tbAddBtn = document.querySelector(".taskAddBtn");
   const taskTitleInput = document.querySelector(".taskTitleInput");
@@ -204,6 +204,8 @@ const taskBoxAddBtnHandler = () => {
           addContentsToInfoBox(infoProjectName.textContent);
           addTaskBtnHandler();
           closeTaskBox();
+          pEditBtnHandler();
+          pDelBtnHandler();
         }
       });
     }
@@ -288,8 +290,6 @@ const epbEditBtnHandler = () => {
         if (CurrentPage.getPageCurrent() === "today") {
           todayRenderCombo();
         }
-        console.log("working");
-        console.log(format(new Date(), "YYYY-MM-DD"));
       }
     });
   });
