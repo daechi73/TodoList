@@ -79,7 +79,7 @@ html {
 }
 .project {
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
 }
 .pDueDateDiv {
   color: red;
