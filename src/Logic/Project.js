@@ -12,7 +12,9 @@ export default class Project {
   }
   getDueDate() {
     return `
-    ${this.dueDate.getMonth()}-${this.dueDate.getDay()}-${this.dueDate.getFullYear()}
+    ${
+      this.dueDate.getUTCMonth() + 1
+    }-${this.dueDate.getUTCDate()}-${this.dueDate.getFullYear()}
     `;
   }
   getTasks() {
