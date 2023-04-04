@@ -50,7 +50,7 @@ const mainSectionEventHandlers = () => {
         p.classList.remove("selected");
         const informationBoxDiv = document.querySelector(".informationBox");
         informationBoxDiv.classList.remove("hidden");
-        addContentsToInfoBox("");
+        document.querySelector(".informationBox").textContent = "";
       } else {
         deHighLight("project");
         p.classList.add("selected");
@@ -289,7 +289,7 @@ const epbEditBtnHandler = () => {
           todayRenderCombo();
         }
         console.log("working");
-        console.log(format(new Date(), "yyyy-MM-dd"));
+        console.log(format(new Date(), "YYYY-MM-DD"));
       }
     });
   });
