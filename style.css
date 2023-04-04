@@ -90,9 +90,11 @@ html {
   gap: 30px;
 }
 .tasksDiv {
+  height: 200px;
   display: flex;
   flex-direction: column;
   gap: 30px;
+  overflow-y: scroll;
 }
 .addProjectBox {
   position: absolute;
