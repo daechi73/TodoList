@@ -8,6 +8,9 @@ import {
   addContentsToInfoBox,
 } from "../Render/PageLayout/Information";
 import { addTaskBox } from "../Render/PageLayout/AddTaskBox";
+import editProjectBox from "../Render/PageLayout/EditProjectxBox";
+
+import { format } from "date-fns";
 
 const CurrentPage = (() => {
   let pageCurrent = "";
@@ -42,7 +45,7 @@ const mainSectionEventHandlers = () => {
   const projects = document.querySelectorAll(".project");
   informationBox();
   projects.forEach((p) => {
-    p.addEventListener("click", (e) => {
+    p.addEventListener("click", () => {
       if (p.classList.contains("selected")) {
         p.classList.remove("selected");
         const informationBoxDiv = document.querySelector(".informationBox");
@@ -56,6 +59,7 @@ const mainSectionEventHandlers = () => {
         addContentsToInfoBox(p.firstChild.textContent);
         addTaskBtnHandler();
         pDelBtnHandler();
+        pEditBtnHandler();
       }
     });
   });
@@ -73,7 +77,7 @@ const deHighLight = (className) => {
   });
 };
 
-const todayCombo = () => {
+const todayRenderCombo = () => {
   const today = document.querySelector(".today");
   todayRender();
   mainSectionEventHandlers();
@@ -82,7 +86,7 @@ const todayCombo = () => {
   CurrentPage.setPageCurrent("today");
 };
 
-const weekCombo = () => {
+const weekRenderCombo = () => {
   const week = document.querySelector(".week");
   const mainSection = document.querySelector(".mainSection");
   mainSection.textContent = "week";
@@ -90,7 +94,7 @@ const weekCombo = () => {
   week.classList.add("selected");
   CurrentPage.setPageCurrent("week");
 };
-const pastProjectCombo = () => {
+const pastProjectRenderCombo = () => {
   const mainSection = document.querySelector(".mainSection");
   const pastProject = document.querySelector(".pastProject");
   mainSection.textContent = "pastProject";
@@ -99,7 +103,7 @@ const pastProjectCombo = () => {
   CurrentPage.setPageCurrent("pastProject");
 };
 
-const projectsCombo = () => {
+const projectsRenderCombo = () => {
   const projects = document.querySelector(".projects");
   projectsRender();
   mainSectionEventHandlers();
@@ -117,16 +121,16 @@ const sidebarEventHandlers = () => {
   const mainSection = document.querySelector(".mainSection");
 
   today.addEventListener("click", () => {
-    todayCombo();
+    todayRenderCombo();
   });
   week.addEventListener("click", () => {
-    weekCombo();
+    weekRenderCombo();
   });
   projects.addEventListener("click", () => {
-    projectsCombo();
+    projectsRenderCombo();
   });
   pastProject.addEventListener("click", () => {
-    pastProjectCombo();
+    pastProjectRenderCombo();
   });
   notes.addEventListener("click", () => {
     mainSection.textContent = "notes";
@@ -162,7 +166,6 @@ const closeProjectBoxBtnHandler = () => {
   });
 };
 const closeTaskBox = () => {
-  const taskBox = document.querySelector(".taskBox");
   document.querySelector(".taskBox").remove();
 };
 const closeTaskBtnHandler = () => {
@@ -176,9 +179,11 @@ const closeTaskBtnHandler = () => {
 const addTaskBtnHandler = () => {
   const addTaskBtn = document.querySelector(".addTaskBtn");
   addTaskBtn.addEventListener("click", () => {
-    addTaskBox();
-    taskBoxAddBtnHandler();
-    closeTaskBtnHandler();
+    if (!document.querySelector(".taskBox")) {
+      addTaskBox();
+      taskBoxAddBtnHandler();
+      closeTaskBtnHandler();
+    }
   });
 };
 //inside TaskBox itself
@@ -203,7 +208,6 @@ const taskBoxAddBtnHandler = () => {
       });
     }
   });
-
   tbAddBtnEventListener;
 };
 
@@ -234,13 +238,60 @@ const pDelBtnHandler = () => {
 
   pDelBtn.addEventListener("click", () => {
     Projects.deleteProject(pNameInfo.textContent);
-    console.log("deleted");
+    console.log("Project deleted");
     if (CurrentPage.getPageCurrent() === "projects") {
-      projectsCombo();
+      projectsRenderCombo();
     }
     if (CurrentPage.getPageCurrent() === "today") {
-      todayCombo();
+      todayRenderCombo();
     }
+  });
+};
+
+const closeEditProjectBox = () => {
+  document.querySelector(".editProjectBox").remove();
+};
+const closeEpbHandler = () => {
+  const closeEpbBtn = document.querySelector(".closeEpbBtn");
+  closeEpbBtn.addEventListener("click", () => {
+    closeEditProjectBox();
+    console.log("working");
+  });
+};
+//inside info
+const pEditBtnHandler = () => {
+  const pEditBtn = document.querySelector(".pEditBtn");
+  pEditBtn.addEventListener("click", () => {
+    if (!document.querySelector(".editProjectBox")) {
+      editProjectBox();
+      closeEpbHandler();
+      epbEditBtnHandler();
+    }
+  });
+};
+
+//inside editbox
+const epbEditBtnHandler = () => {
+  const epbEditBtn = document.querySelector(".epbEditBtn");
+  epbEditBtn.addEventListener("click", () => {
+    //console.log("working");
+    const pNameInfo = document.querySelector(".projectNameInfo");
+    const dueDate = document.querySelector(".eInputDate");
+    Projects.getProjects().forEach((p) => {
+      console.log(pNameInfo.textContent);
+      if (p.getName() === pNameInfo.textContent) {
+        p.setDueDate(dueDate.value);
+        closeEditProjectBox();
+        if (CurrentPage.getPageCurrent() === "projects") {
+          projectsRenderCombo();
+        }
+        if (CurrentPage.getPageCurrent() === "today") {
+          todayRenderCombo();
+        }
+        console.log("working");
+        console.log(format(new Date(), "yyyy-MM-dd"));
+      }
+    });
   });
 };
 

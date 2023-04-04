@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 const addProjectBox = () => {
   const addProjectBox = document.createElement("div");
   const title = document.createElement("div");
@@ -18,9 +19,10 @@ const addProjectBox = () => {
   <div class="inputNameDiv formDiv"><input id="inputPName" class="inputPName" type="text"></input></div>
   <div class="apbDateDiv"><label for="inputDate">Due Date: </label></div>
   <div class="inputDateDiv"><input type="date" id="inputDate" class="inputDate"
-      name="due-Date" value="2023-04-03"></input></div>
+      name="due-Date" value="${format(new Date(), "yyyy-MM-dd")}"></input></div>
   <div class="apbBtnDiv formDiv"><button class="projectSubmitBtn" type="button">+</button></div>
   `;
+
   title.textContent = "Add a project";
   title.classList.add("addProjectBoxTitle");
 

@@ -15,6 +15,9 @@ export default class Project {
       this.dueDate.getUTCMonth() + 1
     }-${this.dueDate.getUTCDate()}-${this.dueDate.getFullYear()}`;
   }
+  setDueDate(newDate) {
+    this.dueDate = new Date(newDate);
+  }
   getTasks() {
     return this.tasks;
   }
