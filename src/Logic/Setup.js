@@ -240,7 +240,6 @@ const pDelBtnHandler = () => {
 
   pDelBtn.addEventListener("click", () => {
     Projects.deleteProject(pNameInfo.textContent);
-    console.log("Project deleted");
     if (CurrentPage.getPageCurrent() === "projects") {
       projectsRenderCombo();
     }
@@ -300,13 +299,16 @@ const pCheckboxHandler = () => {
   pCheckbox.forEach((cb) => {
     cb.addEventListener("click", (event) => {
       event.stopPropagation();
-      console.log(event);
       Projects.getProjects().forEach((p) => {
         if (p.getName() === cb.nextElementSibling.textContent) {
           if (cb.checked) {
             cb.parentElement.classList.add("checked");
+            p.setCheckmark();
+            //console.log(p.getName() + " " + p.getCheckmark());
           } else {
             cb.parentElement.classList.remove("checked");
+            p.setCheckmark();
+            // console.log(p.getName() + " " + p.getCheckmark());
           }
         }
       });
