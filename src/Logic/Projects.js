@@ -25,11 +25,8 @@ export default class Projects {
         if (this.projects[p].getCheckmark() == true) {
           this.pastProjects.push(this.projects[p]);
           this.projects.splice(p, 1);
-          console.log("project transferred then deleted");
         } else {
-          console.log(this.projects[p].getCheckmark());
           this.projects.splice(p, 1);
-          console.log("project only deleted");
         }
       }
     }
