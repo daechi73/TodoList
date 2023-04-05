@@ -307,6 +307,9 @@ const epbEditBtnHandler = () => {
         if (CurrentPage.getPageCurrent() === "today") {
           todayRenderCombo();
         }
+        if (CurrentPage.getPageCurrent() === "week") {
+          weekRenderCombo();
+        }
       }
     });
   });
