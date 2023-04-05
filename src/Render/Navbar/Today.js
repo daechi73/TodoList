@@ -17,6 +17,10 @@ const todayRender = () => {
       const projectDiv = document.createElement("div");
       const pNameDiv = document.createElement("div");
       const pDueDateDiv = document.createElement("div");
+      const pCheckbox = document.createElement("input");
+
+      pCheckbox.type = "checkbox";
+      pCheckbox.classList.add("pCheckbox");
 
       projectDiv.classList.add("project");
       pNameDiv.classList.add("projectName");
@@ -25,6 +29,7 @@ const todayRender = () => {
       pDueDateDiv.classList.add("pDueDateDiv");
       pDueDateDiv.textContent = `Due Date: ${p.getDueDate()}`;
 
+      projectDiv.appendChild(pCheckbox);
       projectDiv.appendChild(pNameDiv);
       projectDiv.appendChild(pDueDateDiv);
       projectContainer.appendChild(projectDiv);

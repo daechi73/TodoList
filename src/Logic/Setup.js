@@ -10,8 +10,6 @@ import {
 import { addTaskBox } from "../Render/PageLayout/AddTaskBox";
 import editProjectBox from "../Render/PageLayout/EditProjectxBox";
 
-import { format } from "date-fns";
-
 const CurrentPage = (() => {
   let pageCurrent = "";
 
@@ -84,6 +82,7 @@ const todayRenderCombo = () => {
   deHighLight("sideNav");
   today.classList.add("selected");
   CurrentPage.setPageCurrent("today");
+  pCheckboxHandler();
 };
 
 const weekRenderCombo = () => {
@@ -304,8 +303,6 @@ const pCheckboxHandler = () => {
       console.log(event);
       Projects.getProjects().forEach((p) => {
         if (p.getName() === cb.nextElementSibling.textContent) {
-          p.setCheckmark();
-          console.log(p.getName() + " " + p.getCheckmark());
           if (cb.checked) {
             cb.parentElement.classList.add("checked");
           } else {
