@@ -68,11 +68,6 @@ html {
   color: white;
 }
 
-.selected {
-  background-color: darkslategrey;
-  color: white;
-}
-
 .projectList {
   text-align: start;
   padding: 20px;
@@ -199,6 +194,14 @@ input {
 .tbErrorMsg {
   color: red;
   height: 10px;
+}
+
+.checked {
+  text-decoration: line-through;
+}
+.selected {
+  background-color: darkslategrey;
+  color: white;
 }
 
 .hidden {
