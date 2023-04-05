@@ -15,6 +15,7 @@ const pastProjectsRender = () => {
     pCheckbox.classList.add("pCheckbox");
     pCheckbox.checked = true;
     pCheckbox.disabled = true;
+    pCheckbox.style.width = "20px";
 
     projectDiv.classList.add("project");
     projectDiv.classList.add("checked");

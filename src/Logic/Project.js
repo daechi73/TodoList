@@ -10,9 +10,7 @@ export default class Project {
     return this.name;
   }
   getDueDate() {
-    return `${
-      this.dueDate.getUTCMonth() + 1
-    }-${this.dueDate.getUTCDate()}-${this.dueDate.getFullYear()}`;
+    return `${this.dueDate.toISOString().split("T")[0]}`;
   }
   setDueDate(newDate) {
     this.dueDate = new Date(newDate);

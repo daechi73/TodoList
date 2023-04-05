@@ -11,6 +11,7 @@ import {
 } from "../Render/PageLayout/Information";
 import { addTaskBox } from "../Render/PageLayout/AddTaskBox";
 import editProjectBox from "../Render/PageLayout/EditProjectxBox";
+import { weekRender } from "../Render/Navbar/Week";
 
 const CurrentPage = (() => {
   let pageCurrent = "";
@@ -24,11 +25,12 @@ const CurrentPage = (() => {
   return { getPageCurrent, setPageCurrent };
 })();
 const startUp = () => {
-  const project = new Project("Odin Project", "2023-04-04");
+  const todaysDate = new Date().toISOString().split("T")[0];
+  const project = new Project("Odin Project", `${todaysDate}`);
   project.addTask(new Task("TodoList", "urgent", false));
   project.addTask(new Task("RestaurantSite", "Urgent", false));
   Projects.addProjects(project);
-  const project2 = new Project("Car Fix", "2023-04-04");
+  const project2 = new Project("Car Fix", `${todaysDate}`);
   project2.addTask(new Task("Blinker Fluid", "urgent", false));
   project2.addTask(new Task("front Axle tighten", "Urgent", false));
   Projects.addProjects(project2);
@@ -62,7 +64,8 @@ const mainSectionEventHandlers = () => {
         informationBoxDiv.classList.remove("hidden");
         if (
           CurrentPage.getPageCurrent() === "today" ||
-          CurrentPage.getPageCurrent() === "projects"
+          CurrentPage.getPageCurrent() === "projects" ||
+          CurrentPage.getPageCurrent() === "week"
         ) {
           addPContentsToInfoBox(p.childNodes[1].textContent);
           addTaskBtnHandler();
@@ -101,11 +104,12 @@ const todayRenderCombo = () => {
 
 const weekRenderCombo = () => {
   const week = document.querySelector(".week");
-  const mainSection = document.querySelector(".mainSection");
-  mainSection.textContent = "week";
+  weekRender();
+  mainSectionEventHandlers();
   deHighLight("sideNav");
   week.classList.add("selected");
   CurrentPage.setPageCurrent("week");
+  pCheckboxHandler();
 };
 const pastProjectRenderCombo = () => {
   const pastProject = document.querySelector(".pastProject");

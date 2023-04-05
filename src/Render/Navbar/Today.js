@@ -5,15 +5,8 @@ const todayRender = () => {
   projectContainer.classList.add("projectList");
   mainSection.textContent = "";
   let todaysDate = new Date();
-  todaysDate =
-    todaysDate.getMonth() +
-    1 +
-    "-" +
-    todaysDate.getDate() +
-    "-" +
-    todaysDate.getFullYear();
   Projects.getProjects().forEach((p) => {
-    if (p.getDueDate() == todaysDate) {
+    if (p.getDueDate() == todaysDate.toISOString().split("T")[0]) {
       const projectDiv = document.createElement("div");
       const pNameDiv = document.createElement("div");
       const pDueDateDiv = document.createElement("div");
