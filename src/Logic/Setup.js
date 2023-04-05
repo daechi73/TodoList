@@ -3,9 +3,11 @@ import Task from "./Task";
 import Projects from "./Projects";
 import { todayRender } from "../Render/Navbar/Today";
 import { projectsRender } from "../Render/Navbar/ProjectsRender";
+import { pastProjectsRender } from "../Render/Navbar/PastProjects";
 import {
   informationBox,
-  addContentsToInfoBox,
+  addPContentsToInfoBox,
+  addPpContentsToInfoBox,
 } from "../Render/PageLayout/Information";
 import { addTaskBox } from "../Render/PageLayout/AddTaskBox";
 import editProjectBox from "../Render/PageLayout/EditProjectxBox";
@@ -32,6 +34,10 @@ const startUp = () => {
   Projects.addProjects(project2);
   const project3 = new Project("BEcome a Millionaire", "2025-01-01");
   Projects.addProjects(project3);
+  const pastproject = new Project("Meal Prep", "2023-03-21");
+  pastproject.addTask(new Task("buy chicken", "urgent", false));
+  pastproject.addTask(new Task("cook chicken", "Urgent", false));
+  Projects.addPastProjects(pastproject);
 
   sidebarEventHandlers();
   addBtnEventHandler();
@@ -54,10 +60,18 @@ const mainSectionEventHandlers = () => {
         p.classList.add("selected");
         const informationBoxDiv = document.querySelector(".informationBox");
         informationBoxDiv.classList.remove("hidden");
-        addContentsToInfoBox(p.childNodes[1].textContent);
-        addTaskBtnHandler();
-        pDelBtnHandler();
-        pEditBtnHandler();
+        if (
+          CurrentPage.getPageCurrent() === "today" ||
+          CurrentPage.getPageCurrent() === "projects"
+        ) {
+          addPContentsToInfoBox(p.childNodes[1].textContent);
+          addTaskBtnHandler();
+          pDelBtnHandler();
+          pEditBtnHandler();
+        }
+
+        if (CurrentPage.getPageCurrent() === "pastProject")
+          addPpContentsToInfoBox(p.childNodes[1].textContent);
       }
     });
   });
@@ -94,12 +108,12 @@ const weekRenderCombo = () => {
   CurrentPage.setPageCurrent("week");
 };
 const pastProjectRenderCombo = () => {
-  const mainSection = document.querySelector(".mainSection");
   const pastProject = document.querySelector(".pastProject");
-  mainSection.textContent = "pastProject";
+  pastProjectsRender();
   deHighLight("sideNav");
   pastProject.classList.add("selected");
   CurrentPage.setPageCurrent("pastProject");
+  mainSectionEventHandlers();
 };
 
 const projectsRenderCombo = () => {
@@ -201,7 +215,7 @@ const taskBoxAddBtnHandler = () => {
       Projects.getProjects().forEach((p) => {
         if (p.getName() === infoProjectName.textContent) {
           p.addTask(task);
-          addContentsToInfoBox(infoProjectName.textContent);
+          addPContentsToInfoBox(infoProjectName.textContent);
           addTaskBtnHandler();
           closeTaskBox();
           pEditBtnHandler();
