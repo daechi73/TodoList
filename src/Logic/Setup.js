@@ -130,6 +130,13 @@ const projectsRenderCombo = () => {
   pCheckboxHandler();
 };
 
+const notesRenderCombo = () => {
+  const notes = document.querySelector(".notes");
+  deHighLight("sideNav");
+  notes.classList.add("selected");
+  CurrentPage.setPageCurrent("notes");
+};
+
 const sidebarEventHandlers = () => {
   const today = document.querySelector(".today");
   const week = document.querySelector(".week");
@@ -151,10 +158,7 @@ const sidebarEventHandlers = () => {
     pastProjectRenderCombo();
   });
   notes.addEventListener("click", () => {
-    mainSection.textContent = "notes";
-    deHighLight("sideNav");
-    notes.classList.add("selected");
-    CurrentPage.setPageCurrent("notes");
+    notesRenderCombo();
   });
 };
 const addBtnEventHandler = () => {
@@ -248,7 +252,6 @@ const projectSubmitBtnHandler = () => {
       deHighlightNavbar();
       document.querySelector(".projects").classList.add("selected");
     }
-    console.log(Projects.getProjects());
   });
 };
 
@@ -274,7 +277,6 @@ const closeEpbHandler = () => {
   const closeEpbBtn = document.querySelector(".closeEpbBtn");
   closeEpbBtn.addEventListener("click", () => {
     closeEditProjectBox();
-    console.log("working");
   });
 };
 //inside info
@@ -293,11 +295,9 @@ const pEditBtnHandler = () => {
 const epbEditBtnHandler = () => {
   const epbEditBtn = document.querySelector(".epbEditBtn");
   epbEditBtn.addEventListener("click", () => {
-    //console.log("working");
     const pNameInfo = document.querySelector(".projectNameInfo");
     const dueDate = document.querySelector(".eInputDate");
     Projects.getProjects().forEach((p) => {
-      console.log(pNameInfo.textContent);
       if (p.getName() === pNameInfo.textContent) {
         p.setDueDate(dueDate.value);
         closeEditProjectBox();

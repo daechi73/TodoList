@@ -20,7 +20,6 @@ const projectsRender = () => {
 
     pDueDateDiv.classList.add("pDueDateDiv");
     pDueDateDiv.textContent = `Due Date: ${p.getDueDate()}`;
-    console.log(`${p.getName()}  ${p.getDueDate()}`);
 
     projectDiv.appendChild(pCheckbox);
     projectDiv.appendChild(pNameDiv);

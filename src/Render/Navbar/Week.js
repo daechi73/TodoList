@@ -9,7 +9,6 @@ const weekRender = () => {
 
   Projects.getProjects().forEach((p) => {
     if (getWeek(new Date(p.getDueDate())) === getWeek(new Date())) {
-      console.log("fu");
       const projectDiv = document.createElement("div");
       const pNameDiv = document.createElement("div");
       const pDueDateDiv = document.createElement("div");
