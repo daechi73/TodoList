@@ -1,10 +1,9 @@
-import { format } from "date-fns";
-
 export default class Project {
   constructor(name, dueDate) {
     this.name = name;
     this.dueDate = new Date(dueDate);
     this.tasks = [];
+    this.checkmark = false;
   }
 
   getName() {
@@ -23,5 +22,11 @@ export default class Project {
   }
   addTask(task) {
     this.tasks.push(task);
+  }
+  getCheckmark() {
+    return this.checkmark;
+  }
+  setCheckmark() {
+    this.checkmark = !this.checkmark;
   }
 }

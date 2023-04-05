@@ -56,7 +56,7 @@ const mainSectionEventHandlers = () => {
         p.classList.add("selected");
         const informationBoxDiv = document.querySelector(".informationBox");
         informationBoxDiv.classList.remove("hidden");
-        addContentsToInfoBox(p.firstChild.textContent);
+        addContentsToInfoBox(p.childNodes[1].textContent);
         addTaskBtnHandler();
         pDelBtnHandler();
         pEditBtnHandler();
@@ -110,6 +110,7 @@ const projectsRenderCombo = () => {
   deHighLight("sideNav");
   projects.classList.add("selected");
   CurrentPage.setPageCurrent("projects");
+  pCheckboxHandler();
 };
 
 const sidebarEventHandlers = () => {
@@ -291,6 +292,27 @@ const epbEditBtnHandler = () => {
           todayRenderCombo();
         }
       }
+    });
+  });
+};
+
+const pCheckboxHandler = () => {
+  const pCheckbox = document.querySelectorAll(".pCheckbox");
+  pCheckbox.forEach((cb) => {
+    cb.addEventListener("click", (event) => {
+      event.stopPropagation();
+      console.log(event);
+      Projects.getProjects().forEach((p) => {
+        if (p.getName() === cb.nextElementSibling.textContent) {
+          p.setCheckmark();
+          console.log(p.getName() + " " + p.getCheckmark());
+          if (cb.checked) {
+            cb.parentElement.classList.add("checked");
+          } else {
+            cb.parentElement.classList.remove("checked");
+          }
+        }
+      });
     });
   });
 };
