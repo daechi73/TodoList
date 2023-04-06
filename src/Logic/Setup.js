@@ -12,6 +12,12 @@ import {
 import { addTaskBox } from "../Render/PageLayout/AddTaskBox";
 import editProjectBox from "../Render/PageLayout/EditProjectxBox";
 import { weekRender } from "../Render/Navbar/Week";
+import {
+  addNotes,
+  notesRender,
+  createNoteObject,
+} from "../Render/Navbar/Notes";
+import Notes from "./Notes";
 
 const CurrentPage = (() => {
   let pageCurrent = "";
@@ -111,12 +117,12 @@ const weekRenderCombo = () => {
   CurrentPage.setPageCurrent("week");
   pCheckboxHandler();
 };
-const pastProjectRenderCombo = () => {
+const pastProjectsCombo = () => {
   const pastProject = document.querySelector(".pastProject");
   pastProjectsRender();
   deHighLight("sideNav");
   pastProject.classList.add("selected");
-  CurrentPage.setPageCurrent("pastProject");
+  CurrentPage.setPageCurrent("pastProjects");
   mainSectionEventHandlers();
 };
 
@@ -132,6 +138,7 @@ const projectsRenderCombo = () => {
 
 const notesRenderCombo = () => {
   const notes = document.querySelector(".notes");
+  notesRender();
   deHighLight("sideNav");
   notes.classList.add("selected");
   CurrentPage.setPageCurrent("notes");
@@ -155,7 +162,7 @@ const sidebarEventHandlers = () => {
     projectsRenderCombo();
   });
   pastProject.addEventListener("click", () => {
-    pastProjectRenderCombo();
+    pastProjectsCombo();
   });
   notes.addEventListener("click", () => {
     notesRenderCombo();
@@ -164,11 +171,23 @@ const sidebarEventHandlers = () => {
 const addBtnEventHandler = () => {
   const addBtn = document.querySelector(".addBtn");
   const addProjectBox = document.querySelector(".addProjectBox");
+
   addBtn.addEventListener("click", () => {
-    if (addProjectBox.classList.contains("hidden")) {
-      addProjectBox.classList.remove("hidden");
-    } else {
-      addProjectBox.classList.add("hidden");
+    if (
+      CurrentPage.getPageCurrent() === "today" ||
+      CurrentPage.getPageCurrent() === "projects" ||
+      CurrentPage.getPageCurrent() === "week" ||
+      CurrentPage.getPageCurrent() === "pastProjects"
+    ) {
+      if (addProjectBox.classList.contains("hidden")) {
+        addProjectBox.classList.remove("hidden");
+      } else {
+        addProjectBox.classList.add("hidden");
+      }
+    }
+    if (CurrentPage.getPageCurrent() === "notes") {
+      addNotes();
+      noteObjectUpdateHandler();
     }
   });
 };
@@ -267,6 +286,9 @@ const pDelBtnHandler = () => {
     if (CurrentPage.getPageCurrent() === "today") {
       todayRenderCombo();
     }
+    if (CurrentPage.getPageCurrent() === "week") {
+      weekRenderCombo();
+    }
   });
 };
 
@@ -330,6 +352,31 @@ const pCheckboxHandler = () => {
             cb.parentElement.classList.remove("checked");
             p.setCheckmark();
             // console.log(p.getName() + " " + p.getCheckmark());
+          }
+        }
+      });
+    });
+  });
+};
+
+const noteObjectUpdateHandler = () => {
+  const noteBoxes = document.querySelectorAll(".noteBox");
+  noteBoxes.forEach((noteBox) => {
+    noteBox.addEventListener("input", (e) => {
+      //console.log(e.target.value);
+
+      Notes.getNotes().forEach((note) => {
+        //console.log(note.getId() + " " + noteBox.id);
+        if (note.getId() == noteBox.id) {
+          //console.log(e.target);
+
+          if (e.target.tagName === "INPUT") {
+            note.setTitle(e.target.value);
+            //console.log(`${note.getId()} title: ${note.getTitle()}`);
+          }
+          if (e.target.tagName === "TEXTAREA") {
+            note.setContent(e.target.value);
+            //console.log(`${note.getId()} content: ${note.getContent()}`);
           }
         }
       });
