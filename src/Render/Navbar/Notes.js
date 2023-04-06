@@ -18,7 +18,7 @@ const notesRender = () => {
 
 const addNotes = (noteTitle, noteContent) => {
   const notesContainer = document.querySelector(".notesContainer");
-  const noteBox = document.createElement("label");
+  const noteBox = document.createElement("div");
   const nbTitleInput = document.createElement("input");
   const nbTextArea = document.createElement("textarea");
 
@@ -49,7 +49,7 @@ const nbTextareaAutoSize = (textarea) => {
   textarea.addEventListener("input", onInputAutosize, false);
 };
 function onInputAutosize() {
-  this.style.height = "20px";
+  this.style.height = "10px";
   this.style.height = this.scrollHeight + "px";
 }
 const createNoteObject = (title, content) => {

@@ -195,15 +195,38 @@ input {
   grid-column: 1/3;
   gap: 20px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  overflow-y: scroll;
+  height: 400px;
+}
+.notesContainer > * {
+  margin: 20px;
 }
 .noteBox {
   display: flex;
   flex-direction: column;
   width: 200px;
+  border-radius: 20px;
+}
+.noteBox > * {
+  border: none;
+  /* padding: 15px; */
+}
+.nbTitleInput {
+  padding: 15px;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: 5px 5px #8a979a;
 }
 .nbTextArea {
+  padding: 5px 15px 5px 15px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   overflow-y: hidden;
-  min-height: 140px;
+  min-height: 100px;
+  resize: none;
+  box-shadow: 5px 5px #8a979a;
 }
 .tbErrorMsg {
   color: red;

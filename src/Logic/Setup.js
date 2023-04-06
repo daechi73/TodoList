@@ -19,6 +19,7 @@ import {
 } from "../Render/Navbar/Notes";
 import Notes from "./Notes";
 
+//current page helps rerender updated information to the currentpage
 const CurrentPage = (() => {
   let pageCurrent = "";
 
@@ -30,6 +31,9 @@ const CurrentPage = (() => {
   };
   return { getPageCurrent, setPageCurrent };
 })();
+
+//holds all the logic: objects, and function
+// calls needed to start up the initial render
 const startUp = () => {
   const todaysDate = new Date().toISOString().split("T")[0];
   const project = new Project("Odin Project", `${todaysDate}`);
@@ -57,6 +61,7 @@ const startUp = () => {
   projectSubmitBtnHandler();
 };
 
+//
 const mainSectionEventHandlers = () => {
   const projects = document.querySelectorAll(".project");
   informationBox();
@@ -181,7 +186,8 @@ const addBtnEventHandler = () => {
       CurrentPage.getPageCurrent() === "today" ||
       CurrentPage.getPageCurrent() === "projects" ||
       CurrentPage.getPageCurrent() === "week" ||
-      CurrentPage.getPageCurrent() === "pastProjects"
+      CurrentPage.getPageCurrent() === "pastProjects" ||
+      CurrentPage.getPageCurrent() === ""
     ) {
       if (addProjectBox.classList.contains("hidden")) {
         addProjectBox.classList.remove("hidden");
@@ -269,11 +275,8 @@ const projectSubmitBtnHandler = () => {
     } else {
       const project = new Project(inputPName.value, inputDate.value);
       Projects.addProjects(project);
-      projectsRender();
-      mainSectionEventHandlers();
+      projectsRenderCombo();
       closeProjectBox();
-      deHighlightNavbar();
-      document.querySelector(".projects").classList.add("selected");
     }
   });
 };
