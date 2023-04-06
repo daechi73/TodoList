@@ -46,6 +46,10 @@ const startUp = () => {
   pastproject.addTask(new Task("buy chicken", "urgent", false));
   pastproject.addTask(new Task("cook chicken", "Urgent", false));
   Projects.addPastProjects(pastproject);
+  Notes.addNotes(
+    new Notes("groceries", "apple, chicken, steak, lettuce, mushrooms")
+  );
+  Notes.addNotes(new Notes("car parts", "flywheel, nuts, bolts"));
 
   sidebarEventHandlers();
   addBtnEventHandler();
