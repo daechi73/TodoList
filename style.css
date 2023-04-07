@@ -34,8 +34,9 @@ html {
   height: 2em;
   width: 2em;
   font-size: 40px;
-  border: solid;
+  border: none;
   border-radius: 50%;
+  box-shadow: 2px 2px #5c5d5d;
 }
 .addBtn:hover {
   background-color: lightgrey;
@@ -133,6 +134,21 @@ input[type="checkbox"] {
   flex-direction: column;
   gap: 30px;
   overflow-y: scroll;
+}
+.addTaskBtn {
+  border: none;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  font-size: 20px;
+  box-shadow: 2px 2px #5c5d5d;
+}
+.addTaskBtn:hover {
+  background-color: lightgrey;
+}
+.addTaskBtn:active {
+  background-color: darkslategrey;
+  color: white;
 }
 .addProjectBox {
   position: absolute;
