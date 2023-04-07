@@ -103,7 +103,7 @@ html {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 15px;
   overflow-y: scroll;
   height: 488px;
 }
@@ -134,6 +134,7 @@ input[type="checkbox"] {
 }
 .projectNameInfo {
   font-size: 30px;
+  text-decoration: underline;
 }
 .tasksDiv {
   height: 200px;
@@ -294,14 +295,66 @@ input {
   top: 20%;
   left: 35%;
   border: solid;
-  width: 400px;
-  height: 400px;
+  width: 350px;
+  height: 350px;
   display: flex;
   flex-direction: column;
   gap: 60px;
   background-color: #353a3b;
   color: #e9e1da;
   border-radius: 40px;
+  padding: 40px;
+}
+.tbHeader {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.tbTitle {
+  font-size: 30px;
+  grid-column: 1/3;
+}
+.tbCloseBtnDiv {
+  grid-column: 3/4;
+  display: flex;
+  justify-content: center;
+}
+.tbCloseBtn {
+  width: 25px;
+  height: 25px;
+  border: none;
+  border-radius: 50%;
+}
+.tbCloseBtn:hover {
+  background-color: lightgrey;
+}
+
+.tbCloseBtn:active {
+  background-color: #ec0505;
+  color: white;
+}
+.tbForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 250px;
+}
+.tbErrorMsg {
+  color: red;
+  height: 30px;
+}
+.taskAddBtn {
+  height: 2em;
+  width: 2em;
+  border-radius: 50%;
+  font-size: 30px;
+  border: none;
+}
+.taskAddBtn:hover {
+  background-color: lightgrey;
+}
+.taskAddBtn:active {
+  background-color: #065a43;
+  color: white;
 }
 .notesContainer {
   display: grid;
@@ -340,10 +393,6 @@ input {
   min-height: 100px;
   resize: none;
   box-shadow: 5px 5px #8a979a;
-}
-.tbErrorMsg {
-  color: red;
-  height: 10px;
 }
 
 .checked {
