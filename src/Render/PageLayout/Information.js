@@ -20,14 +20,16 @@ const addPContentsToInfoBox = (projectName) => {
   pBtnContainer.appendChild(editBtn);
   pBtnContainer.appendChild(delBtn);
   editBtn.classList.add("pEditBtn");
-  editBtn.textContent = "E";
+  editBtn.innerHTML = `<i class='far fa-edit'></i>`;
   delBtn.classList.add("pDelBtn");
-  delBtn.textContent = "D";
+  delBtn.innerHTML = `<i class='far fa-trash-alt'></i>`;
   addTaskBtnDiv.classList.add("addTaskBtnDiv");
   addTaskBtn.classList.add("addTaskBtn");
   addTaskBtn.textContent = "+";
   addTaskBtn.type = "button";
+
   addTaskBtnDiv.appendChild(addTaskBtn);
+
   informationBox.textContent = "";
   //const p = Projects.getProjects().find((x) => x.getName() === projectName);
   Projects.getProjects().forEach((p) => {

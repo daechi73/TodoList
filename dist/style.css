@@ -122,6 +122,10 @@ input[type="checkbox"] {
   flex-direction: column;
   gap: 30px;
   background-color: rgb(202, 201, 181);
+  padding: 20px;
+}
+.projectNameInfo {
+  font-size: 30px;
 }
 .tasksDiv {
   height: 200px;
