@@ -70,8 +70,8 @@ const mainSectionEventHandlers = () => {
       if (p.classList.contains("selected")) {
         p.classList.remove("selected");
         const informationBoxDiv = document.querySelector(".informationBox");
-        informationBoxDiv.classList.remove("hidden");
-        document.querySelector(".informationBox").textContent = "";
+        informationBoxDiv.classList.add("hidden");
+        //document.querySelector(".informationBox").textContent = "";
       } else {
         deHighLight("project");
         p.classList.add("selected");
