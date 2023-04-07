@@ -5,6 +5,7 @@ const header = () => {
   addBtn.classList.add("addBtn");
   addBtn.type = "button";
   header.classList.add("header");
+  title.classList.add("headerTitle");
   title.textContent = "Todo List";
   addBtn.textContent = "+";
   header.appendChild(title);
