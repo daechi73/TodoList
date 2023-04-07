@@ -82,11 +82,12 @@ const addPpContentsToInfoBox = (projectName) => {
   const informationBox = document.querySelector(".informationBox");
 
   const pBtnContainer = document.createElement("div");
-
+  console.log("workingstill");
   informationBox.textContent = "";
   //const p = Projects.getProjects().find((x) => x.getName() === projectName);
   Projects.getPastProjects().forEach((p) => {
     if (p.getName() === projectName) {
+      console.log("workingstill");
       const pName = document.createElement("div");
       const tasksDiv = document.createElement("div");
       tasksDiv.classList.add("tasksDiv");

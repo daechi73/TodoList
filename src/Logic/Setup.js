@@ -88,7 +88,7 @@ const mainSectionEventHandlers = () => {
           pEditBtnHandler();
         }
 
-        if (CurrentPage.getPageCurrent() === "pastProject")
+        if (CurrentPage.getPageCurrent() === "pastProjects")
           addPpContentsToInfoBox(p.childNodes[1].textContent);
       }
     });
