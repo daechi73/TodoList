@@ -12,6 +12,7 @@ const addProjectBox = () => {
   closeProjectBtn.textContent = "x";
   addProjectBox.classList.add("addProjectBox");
   addProjectBox.classList.add("hidden");
+  addProjectBox.tabIndex = "0";
   addProjectForm.classList.add("addProjectForm");
 
   addProjectForm.innerHTML = `

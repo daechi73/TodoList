@@ -51,13 +51,12 @@ const startUp = () => {
   );
   Notes.addNotes(new Notes("car parts", "flywheel, nuts, bolts"));
 
-  window.addEventListener("keydown", (e) => console.log(e));
-
   sidebarEventHandlers();
   addBtnEventHandler();
   closeProjectBoxBtnHandler();
   projectSubmitBtnHandler();
   renderLocalStorage();
+  projectBoxKeyHandler();
 };
 
 //
@@ -185,6 +184,7 @@ const addBtnEventHandler = () => {
     ) {
       if (addProjectBox.classList.contains("hidden")) {
         addProjectBox.classList.remove("hidden");
+        addProjectBox.focus();
       } else {
         addProjectBox.classList.add("hidden");
       }
@@ -192,6 +192,7 @@ const addBtnEventHandler = () => {
     if (CurrentPage.getPageCurrent() === "notes") {
       addNotes();
       noteObjectUpdateHandler();
+      setNotesToLocalStorage();
     }
   });
 };
@@ -228,6 +229,7 @@ const addTaskBtnHandler = () => {
       addTaskBox();
       taskBoxAddBtnHandler();
       closeTaskBtnHandler();
+      editBoxKeyHandler();
     }
   });
 };
@@ -401,17 +403,42 @@ const setPastProjectsToLocalStorage = () => {
   );
 };
 const setNotesToLocalStorage = () => {
-  localStorage.setItem("Notes", JSON.stringify(Notes.getNotes()));
+  localStorage.setItem("notes", JSON.stringify(Notes.getNotes()));
 };
 
 const renderLocalStorage = () => {
   const localProjectList = JSON.parse(localStorage.getItem("projects"));
   const localPastProjectList = JSON.parse(localStorage.getItem("pastProjects"));
   const localNoteList = JSON.parse(localStorage.getItem("notes"));
-
+  console.log(JSON.parse(localStorage.getItem("notes")));
   Projects.getProjectFromLocalStorage(localProjectList);
   Projects.getPastProjectFromLocalStorage(localPastProjectList);
   Notes.getNotesFromLocalStorage(localNoteList);
+};
+
+const editBoxKeyHandler = () => {
+  const taskbox = document.querySelector(".taskBox");
+  taskbox.focus();
+  taskbox.addEventListener("keydown", (e) => {
+    if (document.querySelector(".taskBox")) {
+      if (e.key === "Escape") closeTaskBox();
+      if (e.key === "Enter") {
+        document.querySelector(".taskAddBtn").click();
+      }
+    }
+  });
+};
+const projectBoxKeyHandler = () => {
+  const projectBox = document.querySelector(".addProjectBox");
+  projectBox.focus();
+  projectBox.addEventListener("keydown", (e) => {
+    if (!projectBox.classList.contains("hidden")) {
+      console.log("haha");
+      if (e.key === "Escape") closeProjectBox();
+      if (e.key === "Enter")
+        document.querySelector(".projectSubmitBtn").click();
+    }
+  });
 };
 
 export { startUp };

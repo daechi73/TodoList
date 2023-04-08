@@ -38,6 +38,7 @@ export default class Notes {
       localStorageNotes.forEach((copy) => {
         const newNote = new Notes(copy.title, copy.content);
         Notes.addNotes(newNote);
+        console.log(Notes.getNotes());
       });
     }
   }

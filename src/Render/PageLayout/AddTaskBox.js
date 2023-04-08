@@ -7,6 +7,7 @@ const addTaskBox = () => {
   const tbCloseBtnDiv = document.createElement("div");
 
   taskBox.classList.add("taskBox");
+  taskBox.tabIndex = "0";
   tbHeader.classList.add("tbHeader");
   tbCloseBtn.classList.add("tbCloseBtn");
   tbCloseBtnDiv.classList.add("tbCloseBtnDiv");
