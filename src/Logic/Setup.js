@@ -55,10 +55,13 @@ const startUp = () => {
   );
   Notes.addNotes(new Notes("car parts", "flywheel, nuts, bolts"));
 
+  window.addEventListener("keydown", (e) => console.log(e));
+
   sidebarEventHandlers();
   addBtnEventHandler();
   closeProjectBoxBtnHandler();
   projectSubmitBtnHandler();
+  renderLocalStorage();
 };
 
 //
@@ -94,12 +97,7 @@ const mainSectionEventHandlers = () => {
     });
   });
 };
-const deHighlightNavbar = () => {
-  const sideNavs = document.querySelectorAll(".sideNav");
-  sideNavs.forEach((s) => {
-    s.classList.remove("selected");
-  });
-};
+
 const deHighLight = (className) => {
   const divList = document.querySelectorAll(`.${className}`);
   divList.forEach((d) => {
@@ -277,6 +275,7 @@ const projectSubmitBtnHandler = () => {
       Projects.addProjects(project);
       projectsRenderCombo();
       closeProjectBox();
+      setProjectsToLocalStorage();
     }
   });
 };
@@ -287,6 +286,8 @@ const pDelBtnHandler = () => {
 
   pDelBtn.addEventListener("click", () => {
     Projects.deleteProject(pNameInfo.textContent);
+    setPastProjectsToLocalStorage();
+    setProjectsToLocalStorage();
     if (CurrentPage.getPageCurrent() === "projects") {
       projectsRenderCombo();
     }
@@ -329,6 +330,7 @@ const epbEditBtnHandler = () => {
     Projects.getProjects().forEach((p) => {
       if (p.getName() === pNameInfo.textContent) {
         p.setDueDate(dueDate.value);
+        setProjectsToLocalStorage();
         closeEditProjectBox();
         if (CurrentPage.getPageCurrent() === "projects") {
           projectsRenderCombo();
@@ -379,16 +381,41 @@ const noteObjectUpdateHandler = () => {
 
           if (e.target.tagName === "INPUT") {
             note.setTitle(e.target.value);
+            setNotesToLocalStorage();
             //console.log(`${note.getId()} title: ${note.getTitle()}`);
           }
           if (e.target.tagName === "TEXTAREA") {
             note.setContent(e.target.value);
+            setNotesToLocalStorage();
             //console.log(`${note.getId()} content: ${note.getContent()}`);
           }
         }
       });
     });
   });
+};
+
+const setProjectsToLocalStorage = () => {
+  localStorage.setItem("projects", JSON.stringify(Projects.getProjects()));
+};
+const setPastProjectsToLocalStorage = () => {
+  localStorage.setItem(
+    "pastProjects",
+    JSON.stringify(Projects.getPastProjects())
+  );
+};
+const setNotesToLocalStorage = () => {
+  localStorage.setItem("Notes", JSON.stringify(Notes.getNotes()));
+};
+
+const renderLocalStorage = () => {
+  const localProjectList = JSON.parse(localStorage.getItem("projects"));
+  const localPastProjectList = JSON.parse(localStorage.getItem("pastProjects"));
+  const localNoteList = JSON.parse(localStorage.getItem("notes"));
+
+  Projects.getProjectFromLocalStorage(localProjectList);
+  Projects.getPastProjectFromLocalStorage(localPastProjectList);
+  Notes.getNotesFromLocalStorage(localNoteList);
 };
 
 export { startUp };

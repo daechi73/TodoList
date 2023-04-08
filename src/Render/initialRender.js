@@ -11,7 +11,6 @@ const initialRender = () => {
   mainSection();
   footer();
   addProjectBox();
-  //addTaskBox();
 };
 
 export default initialRender;

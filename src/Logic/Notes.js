@@ -29,4 +29,16 @@ export default class Notes {
   static getNotes() {
     return this.notes;
   }
+  static emptyNotes() {
+    this.notes = [];
+  }
+  static getNotesFromLocalStorage(localStorageNotes) {
+    if (localStorageNotes) {
+      Notes.emptyNotes();
+      localStorageNotes.forEach((copy) => {
+        const newNote = new Notes(copy.title, copy.content);
+        Notes.addNotes(newNote);
+      });
+    }
+  }
 }
