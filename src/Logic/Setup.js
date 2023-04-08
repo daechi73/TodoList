@@ -12,11 +12,7 @@ import {
 import { addTaskBox } from "../Render/PageLayout/AddTaskBox";
 import editProjectBox from "../Render/PageLayout/EditProjectxBox";
 import { weekRender } from "../Render/Navbar/Week";
-import {
-  addNotes,
-  notesRender,
-  createNoteObject,
-} from "../Render/Navbar/Notes";
+import { addNotes, notesRender } from "../Render/Navbar/Notes";
 import Notes from "./Notes";
 
 //current page helps rerender updated information to the currentpage
