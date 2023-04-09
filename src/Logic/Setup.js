@@ -15,8 +15,8 @@ import { weekRender } from "../Render/Navbar/Week";
 import { addNotes, notesRender } from "../Render/Navbar/Notes";
 import Notes from "./Notes";
 
-//current page helps rerender updated information to the currentpage
-const CurrentPage = (() => {
+//current page helps rerender updated information to the currentMainSection
+const currentMainSection = (() => {
   let pageCurrent = "";
 
   const getPageCurrent = () => {
@@ -76,9 +76,9 @@ const mainSectionEventHandlers = () => {
         const informationBoxDiv = document.querySelector(".informationBox");
         informationBoxDiv.classList.remove("hidden");
         if (
-          CurrentPage.getPageCurrent() === "today" ||
-          CurrentPage.getPageCurrent() === "projects" ||
-          CurrentPage.getPageCurrent() === "week"
+          currentMainSection.getPageCurrent() === "today" ||
+          currentMainSection.getPageCurrent() === "projects" ||
+          currentMainSection.getPageCurrent() === "week"
         ) {
           addPContentsToInfoBox(p.childNodes[1].textContent);
           addTaskBtnHandler();
@@ -86,7 +86,7 @@ const mainSectionEventHandlers = () => {
           pEditBtnHandler();
         }
 
-        if (CurrentPage.getPageCurrent() === "pastProjects")
+        if (currentMainSection.getPageCurrent() === "pastProjects")
           addPpContentsToInfoBox(p.childNodes[1].textContent);
       }
     });
@@ -106,7 +106,7 @@ const todayRenderCombo = () => {
   mainSectionEventHandlers();
   deHighLight("sideNav");
   today.classList.add("selected");
-  CurrentPage.setPageCurrent("today");
+  currentMainSection.setPageCurrent("today");
   pCheckboxHandler();
 };
 
@@ -116,7 +116,7 @@ const weekRenderCombo = () => {
   mainSectionEventHandlers();
   deHighLight("sideNav");
   week.classList.add("selected");
-  CurrentPage.setPageCurrent("week");
+  currentMainSection.setPageCurrent("week");
   pCheckboxHandler();
 };
 const pastProjectsCombo = () => {
@@ -124,7 +124,7 @@ const pastProjectsCombo = () => {
   pastProjectsRender();
   deHighLight("sideNav");
   pastProject.classList.add("selected");
-  CurrentPage.setPageCurrent("pastProjects");
+  currentMainSection.setPageCurrent("pastProjects");
   mainSectionEventHandlers();
 };
 
@@ -134,7 +134,7 @@ const projectsRenderCombo = () => {
   mainSectionEventHandlers();
   deHighLight("sideNav");
   projects.classList.add("selected");
-  CurrentPage.setPageCurrent("projects");
+  currentMainSection.setPageCurrent("projects");
   pCheckboxHandler();
 };
 
@@ -143,7 +143,7 @@ const notesRenderCombo = () => {
   notesRender();
   deHighLight("sideNav");
   notes.classList.add("selected");
-  CurrentPage.setPageCurrent("notes");
+  currentMainSection.setPageCurrent("notes");
 };
 
 const sidebarEventHandlers = () => {
@@ -176,11 +176,11 @@ const addBtnEventHandler = () => {
 
   addBtn.addEventListener("click", () => {
     if (
-      CurrentPage.getPageCurrent() === "today" ||
-      CurrentPage.getPageCurrent() === "projects" ||
-      CurrentPage.getPageCurrent() === "week" ||
-      CurrentPage.getPageCurrent() === "pastProjects" ||
-      CurrentPage.getPageCurrent() === ""
+      currentMainSection.getPageCurrent() === "today" ||
+      currentMainSection.getPageCurrent() === "projects" ||
+      currentMainSection.getPageCurrent() === "week" ||
+      currentMainSection.getPageCurrent() === "pastProjects" ||
+      currentMainSection.getPageCurrent() === ""
     ) {
       if (addProjectBox.classList.contains("hidden")) {
         addProjectBox.classList.remove("hidden");
@@ -189,7 +189,7 @@ const addBtnEventHandler = () => {
         addProjectBox.classList.add("hidden");
       }
     }
-    if (CurrentPage.getPageCurrent() === "notes") {
+    if (currentMainSection.getPageCurrent() === "notes") {
       addNotes();
       noteObjectUpdateHandler();
       setNotesToLocalStorage();
@@ -230,6 +230,7 @@ const addTaskBtnHandler = () => {
       taskBoxAddBtnHandler();
       closeTaskBtnHandler();
       editBoxKeyHandler();
+      taskBoxAnimation();
     }
   });
 };
@@ -286,13 +287,13 @@ const pDelBtnHandler = () => {
     Projects.deleteProject(pNameInfo.textContent);
     setPastProjectsToLocalStorage();
     setProjectsToLocalStorage();
-    if (CurrentPage.getPageCurrent() === "projects") {
+    if (currentMainSection.getPageCurrent() === "projects") {
       projectsRenderCombo();
     }
-    if (CurrentPage.getPageCurrent() === "today") {
+    if (currentMainSection.getPageCurrent() === "today") {
       todayRenderCombo();
     }
-    if (CurrentPage.getPageCurrent() === "week") {
+    if (currentMainSection.getPageCurrent() === "week") {
       weekRenderCombo();
     }
   });
@@ -330,13 +331,13 @@ const epbEditBtnHandler = () => {
         p.setDueDate(dueDate.value);
         setProjectsToLocalStorage();
         closeEditProjectBox();
-        if (CurrentPage.getPageCurrent() === "projects") {
+        if (currentMainSection.getPageCurrent() === "projects") {
           projectsRenderCombo();
         }
-        if (CurrentPage.getPageCurrent() === "today") {
+        if (currentMainSection.getPageCurrent() === "today") {
           todayRenderCombo();
         }
-        if (CurrentPage.getPageCurrent() === "week") {
+        if (currentMainSection.getPageCurrent() === "week") {
           weekRenderCombo();
         }
       }
@@ -410,7 +411,7 @@ const renderLocalStorage = () => {
   const localProjectList = JSON.parse(localStorage.getItem("projects"));
   const localPastProjectList = JSON.parse(localStorage.getItem("pastProjects"));
   const localNoteList = JSON.parse(localStorage.getItem("notes"));
-  console.log(JSON.parse(localStorage.getItem("notes")));
+  //console.log(JSON.parse(localStorage.getItem("notes")));
   Projects.getProjectFromLocalStorage(localProjectList);
   Projects.getPastProjectFromLocalStorage(localPastProjectList);
   Notes.getNotesFromLocalStorage(localNoteList);
@@ -439,6 +440,11 @@ const projectBoxKeyHandler = () => {
         document.querySelector(".projectSubmitBtn").click();
     }
   });
+};
+
+const taskBoxAnimation = () => {
+  const taskBox = document.querySelector(".taskBox");
+  taskBox.style.top = "20%";
 };
 
 export { startUp };
