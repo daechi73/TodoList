@@ -172,6 +172,7 @@ input[type="checkbox"] {
   border-radius: 40px;
   padding: 40px;
   gap: 40px;
+  transition: all 0.5s ease-in-out;
 }
 .apbHeader {
   display: grid;
@@ -292,7 +293,7 @@ input {
 }
 .taskBox {
   position: absolute;
-  top: 20%;
+  top: -200%;
   left: 35%;
   border: solid;
   width: 350px;
@@ -304,6 +305,7 @@ input {
   color: #e9e1da;
   border-radius: 40px;
   padding: 40px;
+  transition: all 0.3s ease-in;
 }
 .tbHeader {
   display: grid;
@@ -359,7 +361,6 @@ input {
 .notesContainer {
   display: grid;
   grid-column: 1/3;
-  gap: 20px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   overflow-y: scroll;
   height: 528px;
@@ -404,5 +405,6 @@ input {
 }
 
 .hidden {
-  display: none;
+  visibility: hidden;
+  top: -200%;
 }
