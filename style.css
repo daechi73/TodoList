@@ -132,6 +132,9 @@ input[type="checkbox"] {
   background-color: rgb(202, 201, 181);
   padding: 20px;
 }
+.pEditBtn {
+  width: 26px;
+}
 .projectNameInfo {
   font-size: 30px;
   text-decoration: underline;
