@@ -20,9 +20,9 @@ const addPContentsToInfoBox = (projectName) => {
   pBtnContainer.appendChild(editBtn);
   pBtnContainer.appendChild(delBtn);
   editBtn.classList.add("pEditBtn");
-  editBtn.innerHTML = `<i class='far fa-edit'></i>`;
+  editBtn.innerHTML = `<i class="fa fa-pencil-square-o"></i></i>`;
   delBtn.classList.add("pDelBtn");
-  delBtn.innerHTML = `<i class='far fa-trash-alt'></i>`;
+  delBtn.innerHTML = `<i class="fa fa-trash-o"></i>`;
   addTaskBtnDiv.classList.add("addTaskBtnDiv");
   addTaskBtn.classList.add("addTaskBtn");
   addTaskBtn.textContent = "+";
